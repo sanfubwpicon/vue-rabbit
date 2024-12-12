@@ -1,23 +1,29 @@
 //axios 的基础封装
-import axios from 'axios'
+import axios from "axios";
 
 const httpInstance = axios.create({
-  baseURL: 'http://pcapi-xiaotuxian-front-devtest.itheima.net',
-  timeout: 5000
-})
+  baseURL: "http://pcapi-xiaotuxian-front-devtest.itheima.net",
+  timeout: 5000,
+});
 
 // 拦截器
 
 // axios请求拦截器
-httpInstance.interceptors.request.use(config => {
-  return config
-}, e => Promise.reject(e))
+httpInstance.interceptors.request.use(
+  (config) => {
+    return config;
+  },
+  (e) => Promise.reject(e)
+);
 
 // axios响应式拦截器
-httpInstance.interceptors.response.use(res => res.data, e => {
-  // 统一错误提示
-  return Promise.reject(e)
-})
+httpInstance.interceptors.response.use(
+  (res) => res.data,
+  (e) => {
+    // 统一错误提示
 
-export default httpInstance
+    return Promise.reject(e);
+  }
+);
 
+export default httpInstance;

@@ -1,4 +1,18 @@
-<script setup></script>
+<script setup>
+import { getCategoryAPI } from "@/apis/layout";
+import { onMounted, ref } from "vue";
+
+const categoryList = ref([]);
+const getCategory = async () => {
+  const res = await getCategoryAPI();
+  console.log(res);
+  categoryList.value = res.result;
+};
+
+onMounted(() => {
+  getCategory();
+});
+</script>
 
 <template>
   <header class="app-header">
@@ -6,7 +20,11 @@
       <h1 class="logo">
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
-
+      <ul class="app-header-nav">
+        <li class="home" v-for="item in categoryList" :key="item.id">
+          <RouterLink to="/">{{ item.name }}</RouterLink>
+        </li>
+      </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
         <input type="text" placeholder="搜一搜" />
@@ -34,6 +52,37 @@
       text-indent: -9999px;
       background: url("@/assets/images/logo.png") no-repeat center 18px /
         contain;
+    }
+  }
+
+  .app-header-nav {
+    width: 820px;
+    display: flex;
+    padding-left: 40px;
+    position: relative;
+    z-index: 998;
+
+    li {
+      margin-right: 40px;
+      width: 38px;
+      text-align: center;
+
+      a {
+        font-size: 16px;
+        line-height: 32px;
+        height: 32px;
+        display: inline-block;
+
+        &:hover {
+          color: $xtxColor;
+          border-bottom: 1px solid $xtxColor;
+        }
+      }
+
+      .active {
+        color: $xtxColor;
+        border-bottom: 1px solid $xtxColor;
+      }
     }
   }
 

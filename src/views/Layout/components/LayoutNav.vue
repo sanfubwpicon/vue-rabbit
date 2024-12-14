@@ -13,7 +13,6 @@
           </li>
           <li>
             <el-popconfirm
-              @confirm="confirm"
               title="确认退出吗?"
               confirm-button-text="确认"
               cancel-button-text="取消"
@@ -28,7 +27,7 @@
         </template>
         <template v-else>
           <li>
-            <a href="javascript:;" @click="$router.push('/login')">请先登录</a>
+            <a href="javascript:;">请先登录</a>
           </li>
           <li><a href="javascript:;">帮助中心</a></li>
           <li><a href="javascript:;">关于我们</a></li>
